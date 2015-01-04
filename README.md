@@ -96,9 +96,7 @@ python package wrapping Tesseract is `pytesseract`, which is
 what we will rely on here.
 
 Now, we need to make a class using pytesseract to intake images, and read them.
-Here is the full code, but we will go through it step by step:
-
-### Lets make an OCR Engine
+Here is the full code, but we will go through it step by step: ### Lets make an OCR Engine
 ```
 import logging
 import os
@@ -115,74 +113,23 @@ from StringIO import StringIO
 
 _ALL_WORDS = words.words()
 
-class OcrEngine():
-    def process_image(self, im):
-        """pass an image PIL object in and run basic text analysis"""
-        im.filter(ImageFilter.SHARPEN)
-        im2 = self.resize_image(im, 5, 5);im2.filter(ImageFilter.SHARPEN)
-        im2.save("temp.jpg");image = Image.open('temp.jpg')
-        words_by_row = self._get_rows(pytesseract.image_to_string(image))
-        return self._format_output([self._check_group(word_group) for word_group in words_by_row])
+def process_image(url):
+    image = _get_image(url)
+    image.filter(ImageFilter.SHARPEN)
+    return  pytesseract.image_to_string(image)
 
-    def resize_image(self, image, x, y):
-        """resize an image passing in x and y axis multipliers"""
-        nx, ny = image.size
-        return image.resize((int(nx*x), int(ny*y)), Image.BICUBIC)
-
-    # FIXME use fucking comprehensions and map
-    def _get_rows(self, string):
-        all_words = string.split("\n")
-        last_words = []
-        for group in all_words:
-            last_words.append(group.split(" "))
-        return last_words
-
-    def _check_word(self, word):
-        return str(word).lower() if str(word).lower() in _ALL_WORDS else ""
-
-    # FIXME use fucking comprehensions and map
-    def _check_group(self, word_group):
-        final = []
-        for word in word_group:
-            final.append(self._check_word(word))
-        return final
-
-    # FIXME use fucking comprehensions and map
-    def _format_output(self, output):
-        final = []
-        for group in output:
-            for item in group:
-                good_group = []
-                if item != "":
-                    good_group.append(item)
-            final.append(good_group)
-        return final
-
-ENGINE = OcrEngine()
-
-
+def _get_image(url):
+    return Image.open(StringIO(requests.get(url).content))
 ```
-A note:
-I know a lot of this code needs some maps, filters, list comprehensions,
-and other pythonic love. I scrapped this together quite quickly and welcome
-a PR of some cleanup. I will do it myself in the future when I've the time
-if not. Going on...
 
-Wonderful! A simple class we can use. But let's investigate it further
+Wonderful! A simple function we can use. But let's investigate it further
 in order to truly understand the code and why we are doing what this.
 
 Our main method is `process_image`. Let's dig into it.
 
-`im.filter(ImageFilter.SHARPEN)`
+`image.filter(ImageFilter.SHARPEN)`
 
-First, we sharpen the image. This will crisp up the text. 
-Next, we go in and blow it up, and sharpen again.
-
-`im2 = self.resize_image(im, 5, 5);im2.filter(ImageFilter.SHARPEN)`
-
-and now we use some private methods to get the text out, but we have our output
-
-`words_by_row = self._get_rows(pytesseract.image_to_string(image))`
+We sharpen the image. This will crisp up the text. 
 
 Sweet! A working module to toy with. However, we have some maintenance to do 
 in order to get this code to run. We are using quite a bit of nltk. So, we
@@ -269,16 +216,30 @@ Lets go back to our method for outputting Engine reads:
 ```
 @app.route('/ocr', methods=["POST"])
 def ocr():
-    image_url = request.form.keys()[0]
-    image = urllib.urlretrieve(image_url, 'temp.jpg')
-    image = Image.open('temp.jpg')
-    return jsonify({"words":ENGINE.process_image(image)})
+    try:
+        url = request.form.keys()[0]
+        output = process_image(url)
+        return jsonify(output)
+    except:
+        return jsonify({"error":"ocr error with image, did you send the proper url?"})
+
 ```
 
 Now, as you can see, we just add in the JSON response of the Engine's
 `process_image` method, passing it in a file object using Image from
 PIL to install. A note: You will not have PIL itself installed, this
 runs off of `Pillow` but allows us to do the same thing w/that import.
+
+# LETS RUN THIS SHIT
+`source bin/activate # if you havent already`
+
+`python app.py`
+
+and in another tab...
+
+`curl -X POST http://localhost:5000/ocr -d 'some_image_url'`
+
+# BOOM
 
 ### Possible problems
 - Leptonica/Tesseract build issues.
