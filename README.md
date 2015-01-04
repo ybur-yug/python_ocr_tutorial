@@ -82,3 +82,78 @@ https://github.com/mjhea0/flask-boilerplate
 In the `flask_server` directory I have included the running final version of the server
 with a commit for each stage of the operation as we will build it up. The commit for this
 is "add flask server v1"
+
+It is commit hash `814980374bd4d7d844ecdc1642d0b31074cd239f`
+
+Now, on to the fun stuff. First, we will need to build a way
+to interface with Tesseract using python. We COULD use `popen`
+but that just feels ghetto. A very minimal, but functional
+python package wrapping Tesseract is `pytesseract`, which is
+what we will rely on here.
+
+Now, we need to make a class using pytesseract to intake images, and read them.
+Here is the full code, but we will go through it step by step:
+
+```
+import logging
+import os
+import sys
+import pdb
+import pytesseract
+
+from logging import Formatter, FileHandler
+from PIL import Image
+from PIL import ImageFilter
+from PIL import ImageEnhance
+from nltk.corpus import words
+from StringIO import StringIO
+
+_ALL_WORDS = words.words()
+
+class OcrEngine():
+    def process_image(self, im):
+        """pass an image PIL object in and run basic text analysis"""
+        im.filter(ImageFilter.SHARPEN)
+        im2 = self.resize_image(im, 5, 5);im2.filter(ImageFilter.SHARPEN)
+        im2.save("temp.jpg");image = Image.open('temp.jpg')
+        words_by_row = self._get_rows(pytesseract.image_to_string(image))
+        return self._format_output([self._check_group(word_group) for word_group in words_by_row])
+
+    def resize_image(self, image, x, y):
+        """resize an image passing in x and y axis multipliers"""
+        nx, ny = image.size
+        return image.resize((int(nx*x), int(ny*y)), Image.BICUBIC)
+
+    def _get_rows(self, string):
+        all_words = string.split("\n")
+        last_words = []
+        for group in all_words:
+            last_words.append(group.split(" "))
+        return last_words
+
+    def _check_word(self, word):
+        if str(word).lower() in _ALL_WORDS:
+            return str(word).lower()
+        else:
+            return ""
+
+    def _check_group(self, word_group):
+        final = []
+        for word in word_group:
+            final.append(self._check_word(word))
+        return final
+    def _format_output(self, output):
+        final = []
+        for group in output:
+            for item in group:
+                good_group = []
+                if item != "":
+                    good_group.append(item)
+            final.append(good_group)
+        return final
+
+ENGINE = OcrEngine()
+
+```
+Wonderful! A simple class we can use. But let's investigate it further
+in order to truly understand the code and why we are doing what this.
