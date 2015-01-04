@@ -23,6 +23,7 @@ Now, we'll need ImageMagick as well if we want to toy with images before we thro
 
 `sudo apt-get install imagemagick`
 
+### Building Leptonica
 Now, time for Leptonica, finally!
 
 ```
@@ -42,6 +43,7 @@ First, lets go back a dir from here where we have built Leptonica
 
 `cd ..`
 
+### Building Tesseract
 And now to download, and build Tesseract
 
 ```
@@ -76,6 +78,7 @@ up a Flask server that will allow us to easily build an API that
 we will POST requests to with a link to an image, and it will
 run the character recognition on them.
 
+### Webserver time!
 Flask Boilerplate is a wonderful library for getting a simple, 
 pythonic server running. Check out the repository here:
 https://github.com/mjhea0/flask-boilerplate
@@ -95,6 +98,7 @@ what we will rely on here.
 Now, we need to make a class using pytesseract to intake images, and read them.
 Here is the full code, but we will go through it step by step:
 
+### Lets make an OCR Engine
 ```
 import logging
 import os
@@ -192,6 +196,7 @@ Now lets install everything.
 
 `pip install -r requirements.txt`
 
+### Configuring NLTK
 And now that NLTK will be in our env, we run `python` to fire up a shell.
 
 In this, we are going to run the following:
@@ -203,3 +208,55 @@ d
 all-corpora
 ```
 Grab a beer. This will take a minute.
+
+Now, we have everything we need to run some basic OCR.
+
+### Optional: Building a CLI tool for your new OCR Engine
+Making a CLI is a great proof of concept, and a fun breather
+after doing so much configuration. So lets take a stab at making
+one.
+
+```
+import os
+import sys
+import pdb
+import requests
+import pytesseract
+
+from PIL import Image
+from PIL import ImageFilter
+from PIL import ImageEnhance
+from nltk.corpus import words
+from StringIO import StringIO
+
+_ALL_WORDS = words.words()
+
+def get_image(url):
+    return Image.open(StringIO(requests.get(url).content))
+
+if __name__ == '__main__':
+    """This is a tool to test the raw output of pytesseract with a given input URL"""
+    sys.stdout.write("""
+===OOOO=====CCCCC===RRRRRR=====\n
+==OO==OO===CC=======RR===RR====\n
+==OO==OO===CC=======RR===RR====\n
+==OO==OO===CC=======RRRRRR=====\n
+==OO==OO===CC=======RR==RR=====\n
+==OO==OO===CC=======RR== RR====\n
+===OOOO=====CCCCC===RR====RR===\n\n
+""")
+    sys.stdout.write("A simple OCR utility\n")
+    url = raw_input("What is the url of the image you would like to analyze?\n")
+    image = get_image(url)
+    sys.stdout.write("The raw output from tesseract with no processing is:\n\n\n")
+    sys.stdout.write("-----------------BEGIN-----------------\n")
+    sys.stdout.write(pytesseract.image_to_string(image) + "\n")
+    sys.stdout.write("------------------END------------------\n")
+```
+
+This is really quite simple. Line by line we look at the text output
+from our engine, and output to to STDOUT. Test it out with a few image
+urls, or play with your own ascii art for a good time.
+
+### Back to the server
+Coming soon
