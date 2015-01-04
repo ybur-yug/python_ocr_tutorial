@@ -1,4 +1,3 @@
-import pdb
 import logging
 import urllib
 import pdb
@@ -19,7 +18,9 @@ app = Flask(__name__)
 @app.route('/ocr', methods=["POST"])
 def ocr():
     try:
-        return jsonify(process_image(request.form.keys()[0]))
+        url = request.form.keys()[0]
+        output = process_image(url)
+        return jsonify({"output":output})
     except:
         return jsonify({"error":"ocr error with image, did you send the proper url?"})
 
