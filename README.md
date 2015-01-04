@@ -178,7 +178,7 @@ from PIL import ImageEnhance
 from nltk.corpus import words
 from StringIO import StringIO
 
-_ALL_WORDS = words.words()
+_ALL_WORDS = words.words() # we use this later
 
 def get_image(url):
     return Image.open(StringIO(requests.get(url).content))
@@ -266,3 +266,17 @@ piece will add more to the main tutorial.
 Hope you enjoyed, please fork or star if you want to see/do/use
 more :)
 
+# What's Next?
+- Using our `_ALL_WORDS` variable that was suspiciously never utilized for some NLTK fun
+- Process text by row! Turn images to check if its misaligned! 
+- More Pre-processing for image optimization
+- turn image to greyscale
+- more!
+
+# When do we get to see what is next?
+When I make it, or you send me a PR with it.
+I plan on working on this with most of my free time.
+
+# Man, this stuff sure is cool!
+Follow me on twitter, 
+### http://twitter.com/_devbob
