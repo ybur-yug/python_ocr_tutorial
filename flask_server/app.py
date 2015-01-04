@@ -1,12 +1,15 @@
 import pdb
 import logging
+import urllib
 import pdb
 import os
 import sys
 
 from forms import *
+from PIL import Image
 from logging import Formatter, FileHandler
 from flask import Flask, render_template, request, jsonify
+from ocr import ENGINE
 
 app = Flask(__name__)
 
@@ -20,15 +23,13 @@ def login_required(test):
             return redirect(url_for('login'))
     return wrap
 
-@app.route('/')
-def home():
-    return render_template('pages/placeholder.home.html')
-
 @app.route('/ocr', methods=["POST"])
 def ocr():
-    form = RegisterForm(request.form)
-    image_url = request.form['image_url']
-    return jsonify({"result":"success"})
+    image_url = request.form.keys()[0]
+    image = urllib.urlretrieve(image_url, 'temp.jpg')
+    image = Image.open('temp.jpg')
+    return jsonify({"words":ENGINE.process_image(image)})
+
 
 @app.errorhandler(500)
 def internal_error(error):
@@ -50,5 +51,5 @@ if not app.debug:
     app.logger.info('errors')
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5001))
+    port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
