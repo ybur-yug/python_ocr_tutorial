@@ -178,6 +178,7 @@ will need to install all corpora.
 from the main directory of the flask server, we need to make a virtualenv
 
 `virtualenv .`
+
 `source bin/activate`
 
 Now lets install everything.
