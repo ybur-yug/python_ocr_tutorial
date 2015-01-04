@@ -74,3 +74,11 @@ to read the docs if you want to play. But the next step is setting
 up a Flask server that will allow us to easily build an API that
 we will POST requests to with a link to an image, and it will
 run the character recognition on them.
+
+Flask Boilerplate is a wonderful library for getting a simple, 
+pythonic server running. Check out the repository here:
+https://github.com/mjhea0/flask-boilerplate
+
+In the `flask_server` directory I have included the running final version of the server
+with a commit for each stage of the operation as we will build it up. The commit for this
+is "add flask server v1"
