@@ -7,14 +7,14 @@ for 12.x and 13.x as well. Though I have not tested this. YMMV.
 OSX is a shot in the dark. glhf.
 
 We need Tesseract and Leptonica, as well as some dependencies
-for sanity checks to start.
+for sanity checks to start. If you already have these, continue.
 
 ```
 sudo apt-get install autoconf automake libtool
 sudo apt-get install libpng12-dev
 sudo apt-get install libjpeg62-dev
+sudo apt-get install g++
 sudo apt-get install libtiff4-dev
-sudo apt-get install g++kj
 sudo apt-get install libopencv-dev libtesseract-dev git cmake build-essential libleptonica-dev
 sudo apt-get install liblog4cplus-dev libcurl3-dev
 ```
@@ -129,6 +129,7 @@ class OcrEngine():
         nx, ny = image.size
         return image.resize((int(nx*x), int(ny*y)), Image.BICUBIC)
 
+    # FIXME use fucking comprehensions and map
     def _get_rows(self, string):
         all_words = string.split("\n")
         last_words = []
@@ -137,16 +138,16 @@ class OcrEngine():
         return last_words
 
     def _check_word(self, word):
-        if str(word).lower() in _ALL_WORDS:
-            return str(word).lower()
-        else:
-            return ""
+        return str(word).lower() if str(word).lower() in _ALL_WORDS else ""
 
+    # FIXME use fucking comprehensions and map
     def _check_group(self, word_group):
         final = []
         for word in word_group:
             final.append(self._check_word(word))
         return final
+
+    # FIXME use fucking comprehensions and map
     def _format_output(self, output):
         final = []
         for group in output:
@@ -158,6 +159,7 @@ class OcrEngine():
         return final
 
 ENGINE = OcrEngine()
+
 
 ```
 A note:
@@ -259,4 +261,47 @@ from our engine, and output to to STDOUT. Test it out with a few image
 urls, or play with your own ascii art for a good time.
 
 ### Back to the server
-Coming soon
+Now, we have an engine, we have an API, and we need to get ourselves some
+output!
+
+Lets go back to our method for outputting Engine reads:
+
+```
+@app.route('/ocr', methods=["POST"])
+def ocr():
+    image_url = request.form.keys()[0]
+    image = urllib.urlretrieve(image_url, 'temp.jpg')
+    image = Image.open('temp.jpg')
+    return jsonify({"words":ENGINE.process_image(image)})
+```
+
+Now, as you can see, we just add in the JSON response of the Engine's
+`process_image` method, passing it in a file object using Image from
+PIL to install. A note: You will not have PIL itself installed, this
+runs off of `Pillow` but allows us to do the same thing w/that import.
+
+### Possible problems
+- Leptonica/Tesseract build issues.
+If the versions provided here do not work or are deprecated,
+uninstall and the first try installing with `apt-get`.
+
+`sudo apt-get install tesseract-ocr`
+
+If you get an error like:
+"some index out of range" on line 512 of some obscure file,
+everything crashes, and sets itself on fire (literally),
+everything crashes, and sets itself on fire (figuratively),
+or the machine spits in your face.
+
+Your best bet is to uninstall/reinstall and compile from the latest
+binary you can find, rather than what I have used here. There are many
+small configuration issues that may come along, and I would love
+to document all of them. So PR's that do this are welcome and I
+am working on doing this on different systems myself.
+
+This is a WIP and I plan on maintaining and adding to it. Each
+piece will add more to the main tutorial.
+
+Hope you enjoyed, please fork or star if you want to see/do/use
+more :)
+
