@@ -19,10 +19,7 @@ app = Flask(__name__)
 @app.route('/ocr', methods=["POST"])
 def ocr():
     try:
-        url = request.form.keys()[0]
-        pdb.set_trace()
-        output = process_image(url)
-        return jsonify(output)
+        return jsonify(process_image(request.form.keys()[0]))
     except:
         return jsonify({"error":"ocr error with image, did you send the proper url?"})
 
@@ -45,6 +42,5 @@ if not app.debug:
     app.logger.info('errors')
 
 if __name__ == '__main__':
-    a = process_image("http://www.juncha.net/wp-content/uploads/2014/06/lionking_juncha2.jpg")
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
