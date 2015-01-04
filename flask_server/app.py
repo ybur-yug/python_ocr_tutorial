@@ -6,7 +6,6 @@ import sys
 import pytesseract
 import requests
 
-from forms import *
 from PIL import Image
 from logging import Formatter, FileHandler
 from flask import Flask, render_template, request, jsonify
