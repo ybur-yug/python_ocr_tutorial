@@ -156,6 +156,12 @@ class OcrEngine():
 ENGINE = OcrEngine()
 
 ```
+A note:
+I know a lot of this code needs some maps, filters, list comprehensions,
+and other pythonic love. I scrapped this together quite quickly and welcome
+a PR of some cleanup. I will do it myself in the future when I've the time
+if not. Going on...
+
 Wonderful! A simple class we can use. But let's investigate it further
 in order to truly understand the code and why we are doing what this.
 
