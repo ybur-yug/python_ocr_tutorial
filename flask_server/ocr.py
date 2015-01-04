@@ -27,6 +27,7 @@ class OcrEngine():
         nx, ny = image.size
         return image.resize((int(nx*x), int(ny*y)), Image.BICUBIC)
 
+    # FIXME use fucking comprehensions and map
     def _get_rows(self, string):
         all_words = string.split("\n")
         last_words = []
@@ -35,16 +36,16 @@ class OcrEngine():
         return last_words
 
     def _check_word(self, word):
-        if str(word).lower() in _ALL_WORDS:
-            return str(word).lower()
-        else:
-            return ""
+        return str(word).lower() if str(word).lower() in _ALL_WORDS else ""
 
+    # FIXME use fucking comprehensions and map
     def _check_group(self, word_group):
         final = []
         for word in word_group:
             final.append(self._check_word(word))
         return final
+
+    # FIXME use fucking comprehensions and map
     def _format_output(self, output):
         final = []
         for group in output:
