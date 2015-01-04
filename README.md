@@ -2,7 +2,8 @@
 
 ### Beginning steps
 First, we have to install some shit. As always, configging your
-env is 90% of the fun
+env is 90% of the fun. This is in Ubuntu 14.04 but it should work
+for 12.x and 13.x as well. Though I have not tested this. YMMV.
 
 We need Tesseract and Leptonica, as well as some dependencies
 for sanity checks to start.
