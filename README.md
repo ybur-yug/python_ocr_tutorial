@@ -157,3 +157,41 @@ ENGINE = OcrEngine()
 ```
 Wonderful! A simple class we can use. But let's investigate it further
 in order to truly understand the code and why we are doing what this.
+
+Our main method is `process_image`. Let's dig into it.
+
+`im.filter(ImageFilter.SHARPEN)`
+
+First, we sharpen the image. This will crisp up the text. 
+Next, we go in and blow it up, and sharpen again.
+
+`im2 = self.resize_image(im, 5, 5);im2.filter(ImageFilter.SHARPEN)`
+
+and now we use some private methods to get the text out, but we have our output
+
+`words_by_row = self._get_rows(pytesseract.image_to_string(image))`
+
+Sweet! A working module to toy with. However, we have some maintenance to do 
+in order to get this code to run. We are using quite a bit of nltk. So, we
+will need to install all corpora.
+
+from the main directory of the flask server, we need to make a virtualenv
+
+`virtualenv .`
+`source bin/activate`
+
+Now lets install everything.
+
+`pip install -r requirements.txt`
+
+And now that NLTK will be in our env, we run `python` to fire up a shell.
+
+In this, we are going to run the following:
+
+```
+import nltk
+nltk.download()
+d
+all-corpora
+```
+Grab a beer. This will take a minute.
