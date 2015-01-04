@@ -13,6 +13,7 @@ for sanity checks to start.
 sudo apt-get install autoconf automake libtool
 sudo apt-get install libpng12-dev
 sudo apt-get install libjpeg62-dev
+sudo apt-get install g++
 sudo apt-get install libtiff4-dev
 sudo apt-get install libopencv-dev libtesseract-dev git cmake build-essential libleptonica-dev
 sudo apt-get install liblog4cplus-dev libcurl3-dev
