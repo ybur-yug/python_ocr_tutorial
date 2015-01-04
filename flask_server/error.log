@@ -1,0 +1,219 @@
+
+2015-01-04 00:57:07,388 INFO: errors [in app.py:49]
+2015-01-04 00:57:12,553 ERROR: Exception on / [GET] [in /home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "app.py", line 24, in home
+    return render_template('pages/placeholder.home.html')
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/templating.py", line 128, in render_template
+    context, ctx.app)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/templating.py", line 110, in _render
+    rv = template.render(context)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/jinja2/environment.py", line 969, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/jinja2/environment.py", line 742, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/bobby/ocr/flask_server/templates/pages/placeholder.home.html", line 1, in top-level template code
+    {% extends 'layouts/main.html' %}
+  File "/home/bobby/ocr/flask_server/templates/layouts/main.html", line 56, in top-level template code
+    <li {% if request.endpoint == 'about' %} class="active" {% endif %}><a href="{{ url_for('about') }}">About</a></li>
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/helpers.py", line 312, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1641, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/helpers.py", line 305, in url_for
+    force_external=external)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/werkzeug/routing.py", line 1620, in build
+    raise BuildError(endpoint, values, method)
+BuildError: ('about', {}, None)
+2015-01-04 00:57:12,903 ERROR: Exception on /favicon.ico [GET] [in /home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1370, in handle_user_exception
+    return self.handle_http_exception(e)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1330, in handle_http_exception
+    return handler(e)
+  File "app.py", line 39, in not_found_error
+    return render_template('errors/404.html'), 404
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/templating.py", line 128, in render_template
+    context, ctx.app)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/templating.py", line 110, in _render
+    rv = template.render(context)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/jinja2/environment.py", line 969, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/jinja2/environment.py", line 742, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/bobby/ocr/flask_server/templates/errors/404.html", line 1, in top-level template code
+    {% extends 'layouts/main.html' %}
+  File "/home/bobby/ocr/flask_server/templates/layouts/main.html", line 56, in top-level template code
+    <li {% if request.endpoint == 'about' %} class="active" {% endif %}><a href="{{ url_for('about') }}">About</a></li>
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/helpers.py", line 312, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1641, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/helpers.py", line 305, in url_for
+    force_external=external)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/werkzeug/routing.py", line 1620, in build
+    raise BuildError(endpoint, values, method)
+BuildError: ('about', {}, None)
+2015-01-04 00:57:16,435 ERROR: Exception on /favicon.ico [GET] [in /home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1370, in handle_user_exception
+    return self.handle_http_exception(e)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1330, in handle_http_exception
+    return handler(e)
+  File "app.py", line 39, in not_found_error
+    return render_template('errors/404.html'), 404
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/templating.py", line 128, in render_template
+    context, ctx.app)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/templating.py", line 110, in _render
+    rv = template.render(context)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/jinja2/environment.py", line 969, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/jinja2/environment.py", line 742, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/bobby/ocr/flask_server/templates/errors/404.html", line 1, in top-level template code
+    {% extends 'layouts/main.html' %}
+  File "/home/bobby/ocr/flask_server/templates/layouts/main.html", line 56, in top-level template code
+    <li {% if request.endpoint == 'about' %} class="active" {% endif %}><a href="{{ url_for('about') }}">About</a></li>
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/helpers.py", line 312, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1641, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/helpers.py", line 305, in url_for
+    force_external=external)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/werkzeug/routing.py", line 1620, in build
+    raise BuildError(endpoint, values, method)
+BuildError: ('about', {}, None)
+2015-01-04 00:57:53,340 ERROR: Exception on /ocr [POST] [in /home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "app.py", line 28, in ocr
+    form = RegisterForm(request.form)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/wtforms/form.py", line 178, in __call__
+    return type.__call__(cls, *args, **kwargs)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask_wtf/form.py", line 95, in __init__
+    *args, **kwargs)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/wtforms/ext/csrf/form.py", line 22, in __init__
+    self.csrf_token.current_token = self.generate_csrf_token(csrf_context)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask_wtf/form.py", line 100, in generate_csrf_token
+    return generate_csrf(self.SECRET_KEY, self.TIME_LIMIT)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask_wtf/csrf.py", line 41, in generate_csrf
+    raise Exception('Must provide secret_key to use csrf.')
+Exception: Must provide secret_key to use csrf.
+2015-01-04 00:58:53,679 INFO: errors [in app.py:51]
+2015-01-04 00:59:12,908 ERROR: Exception on /ocr [POST] [in /home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "app.py", line 29, in ocr
+    form = RegisterForm(request.form)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/wtforms/form.py", line 178, in __call__
+    return type.__call__(cls, *args, **kwargs)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask_wtf/form.py", line 95, in __init__
+    *args, **kwargs)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/wtforms/ext/csrf/form.py", line 22, in __init__
+    self.csrf_token.current_token = self.generate_csrf_token(csrf_context)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask_wtf/form.py", line 100, in generate_csrf_token
+    return generate_csrf(self.SECRET_KEY, self.TIME_LIMIT)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask_wtf/csrf.py", line 41, in generate_csrf
+    raise Exception('Must provide secret_key to use csrf.')
+Exception: Must provide secret_key to use csrf.
+2015-01-04 00:59:57,707 INFO: errors [in app.py:50]
+2015-01-04 01:00:50,731 ERROR: Exception on /ocr [POST] [in /home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "app.py", line 30, in ocr
+    form = RegisterForm(request.form)
+  File "app.py", line 30, in ocr
+    form = RegisterForm(request.form)
+  File "/usr/lib/python2.7/bdb.py", line 49, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/usr/lib/python2.7/bdb.py", line 68, in dispatch_line
+    if self.quitting: raise BdbQuit
+BdbQuit
+2015-01-04 01:02:34,610 INFO: errors [in app.py:50]
+2015-01-04 01:03:14,830 ERROR: Exception on /ocr [POST] [in /home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "app.py", line 30, in ocr
+    form = RegisterForm(request.form)
+  File "app.py", line 30, in ocr
+    form = RegisterForm(request.form)
+  File "/usr/lib/python2.7/bdb.py", line 49, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/usr/lib/python2.7/bdb.py", line 68, in dispatch_line
+    if self.quitting: raise BdbQuit
+BdbQuit
+2015-01-04 01:03:34,937 ERROR: Exception on /ocr [POST] [in /home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/bobby/codys_app/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "app.py", line 30, in ocr
+    form = RegisterForm(request.form)
+  File "app.py", line 30, in ocr
+    form = RegisterForm(request.form)
+  File "/usr/lib/python2.7/bdb.py", line 49, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/usr/lib/python2.7/bdb.py", line 68, in dispatch_line
+    if self.quitting: raise BdbQuit
+BdbQuit
