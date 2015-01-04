@@ -4,41 +4,35 @@ import urllib
 import pdb
 import os
 import sys
+import pytesseract
+import requests
 
 from forms import *
 from PIL import Image
 from logging import Formatter, FileHandler
 from flask import Flask, render_template, request, jsonify
-from ocr import ENGINE
+from ocr import process_image
+from StringIO import StringIO
 
 app = Flask(__name__)
 
-def login_required(test):
-    @wraps(test)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return test(*args, **kwargs)
-        else:
-            flash('You need to login first.')
-            return redirect(url_for('login'))
-    return wrap
-
 @app.route('/ocr', methods=["POST"])
 def ocr():
-    image_url = request.form.keys()[0]
-    image = urllib.urlretrieve(image_url, 'temp.jpg')
-    image = Image.open('temp.jpg')
-    return jsonify({"words":ENGINE.process_image(image)})
-
+    try:
+        url = request.form.keys()[0]
+        pdb.set_trace()
+        output = process_image(url)
+        return jsonify(output)
+    except:
+        return jsonify({"error":"ocr error with image, did you send the proper url?"})
 
 @app.errorhandler(500)
 def internal_error(error):
-    return render_template('errors/500.html'), 500
-
+    print str(error)
 
 @app.errorhandler(404)
 def not_found_error(error):
-    return render_template('errors/404.html'), 404
+    print str(error)
 
 if not app.debug:
     file_handler = FileHandler('error.log')
@@ -51,5 +45,6 @@ if not app.debug:
     app.logger.info('errors')
 
 if __name__ == '__main__':
+    a = process_image("http://www.juncha.net/wp-content/uploads/2014/06/lionking_juncha2.jpg")
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
