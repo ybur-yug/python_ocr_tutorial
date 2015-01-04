@@ -178,7 +178,7 @@ from PIL import ImageEnhance
 from nltk.corpus import words
 from StringIO import StringIO
 
-_ALL_WORDS = words.words()
+_ALL_WORDS = words.words() # we use this later
 
 def get_image(url):
     return Image.open(StringIO(requests.get(url).content))
