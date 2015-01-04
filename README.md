@@ -241,6 +241,23 @@ and in another tab...
 
 # BOOM
 
+### Lets make it better
+Right now, we get pretttty simple output. We manipulate it in no way. For example:
+
+```
+bobby@devbox:~/ocr/flask_server$ curl -X POST http://localhost:5000/ocr -d 'https://s-media-cache-ec0.pinimg.com/originals/02/58/8f/02588f420dd4fe0ed13d93613de0da7.jpg'
+{
+  "output": "Stfawfbeffy Lemon\nHerbal Tea\nSlushie"
+}
+```
+
+Nothing Fancy. We really need to be checking if it is an english word, 
+and also that it is spelled properly if it is. This is harder than it
+seems. And while we're at it, we should probably split the words by
+those newlines so that we can process by row. 
+
+### How to do it coming soon....
+
 ### Possible problems
 - Leptonica/Tesseract build issues.
 If the versions provided here do not work or are deprecated,
