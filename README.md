@@ -52,3 +52,24 @@ make
 sudo make install
 sudo ldconfig
 ```
+
+We need to set up an env var to source for our Tesseract data, so we'll take care of that now
+
+`export TESSDATA_PREFIX=/usr/local/share/`
+
+I put it in my `~/.dev_env` file and `source ~/.dev_env` but running the command works too
+
+Now, lets get the Tesseract english language packages that are relevent
+
+```
+cd ..
+wget https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.eng.tar.gz
+tar -xf tesseract-ocr-3.02.eng.tar.gz
+sudo cp -r tesseract-ocr/tessdata $TESSDATA_PREFIX
+```
+
+BOOM! We now have Tesseract. We can use the CLI, and feel free
+to read the docs if you want to play. But the next step is setting
+up a Flask server that will allow us to easily build an API that
+we will POST requests to with a link to an image, and it will
+run the character recognition on them.
