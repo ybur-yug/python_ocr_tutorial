@@ -73,7 +73,8 @@ sudo cp -r tesseract-ocr/tessdata $TESSDATA_PREFIX
 ```
 
 BOOM! We now have Tesseract. We can use the CLI, and feel free
-to read the docs if you want to play. But the next step is setting
+to read the docs if you want to play. However, we need a Python
+wrapper to truly achieve our end goal. So the next step is setting
 up a Flask server that will allow us to easily build an API that
 we will POST requests to with a link to an image, and it will
 run the character recognition on them.
@@ -95,8 +96,10 @@ but that just feels ghetto. A very minimal, but functional
 python package wrapping Tesseract is `pytesseract`, which is
 what we will rely on here.
 
+### Lets make an OCR Engine
 Now, we need to make a class using pytesseract to intake images, and read them.
-Here is the full code, but we will go through it step by step: ### Lets make an OCR Engine
+Here is the full code, but we will go through it step by step: 
+
 ```
 import logging
 import os
@@ -241,22 +244,12 @@ and in another tab...
 
 # BOOM
 
-### Lets make it better
-Right now, we get pretttty simple output. We manipulate it in no way. For example:
-
 ```
 bobby@devbox:~/ocr/flask_server$ curl -X POST http://localhost:5000/ocr -d 'https://s-media-cache-ec0.pinimg.com/originals/02/58/8f/02588f420dd4fe0ed13d93613de0da7.jpg'
 {
   "output": "Stfawfbeffy Lemon\nHerbal Tea\nSlushie"
 }
 ```
-
-Nothing Fancy. We really need to be checking if it is an english word, 
-and also that it is spelled properly if it is. This is harder than it
-seems. And while we're at it, we should probably split the words by
-those newlines so that we can process by row. 
-
-### How to do it coming soon....
 
 ### Possible problems
 - Leptonica/Tesseract build issues.
@@ -292,7 +285,7 @@ more :)
 
 # When do we get to see what is next?
 When I make it, or you send me a PR with it.
-I plan on working on this with most of my free time.
+I will be making part 2 more in depth, and its own repo
 
 # Man, this stuff sure is cool!
 Follow me on twitter, 
