@@ -1,10 +1,22 @@
-import logging
 import os
+import logging
 from logging import Formatter, FileHandler
-from flask import Flask
+from flask import Flask, request, jsonify
+
+from ocr import process_image
 
 
 app = Flask(__name__)
+
+
+@app.route('/ocr', methods=["POST"])
+def ocr():
+    try:
+        url = request.form.keys()[0]
+        output = process_image(url)
+        return jsonify({"output": output})
+    except:
+        return jsonify({"error": "Did you send the proper url?"})
 
 
 @app.errorhandler(500)
