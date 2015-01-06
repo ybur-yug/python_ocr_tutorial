@@ -6,8 +6,10 @@ env is 90% of the fun. This is in Ubuntu 14.04 but it should work
 for 12.x and 13.x as well. Though I have not tested this. YMMV.
 OSX is a shot in the dark. glhf.
 
-We need Tesseract and Leptonica, as well as some dependencies
-for sanity checks to start. If you already have these, continue.
+We need Tesseract and all of its dependencies, which includes 
+Leptonica, as well as some other packages that power these two
+for sanity checks to start. If you already have Tesseract and all
+dependencies, continue on without fear. Your bases are fortified.
 
 ```
 sudo apt-get install autoconf automake libtool
