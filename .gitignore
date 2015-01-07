@@ -52,3 +52,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Other
+flask_server_old
+blog.md
