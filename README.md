@@ -1,7 +1,5 @@
 # Setting up a Simple OCR Server
 
-**Let's build a simple a simple Flask OCR server with [Tesseract](http://en.wikipedia.org/wiki/Tesseract_%28software%29). *This is a guest post by [Bobby Grayson](http://twitter.com/_devbob), a software developer at [Ahalogy](http://www.ahalogy.com/).***
-
 ## Beginning steps
 
 First, we have to install some dependencies. As always, configuring your environment is 90% of the fun.
