@@ -1,6 +1,25 @@
 # Setting up a Simple OCR Server
 
+## Why?
+OCR has become a common technology. With the advent of libraries such as Tesseract, Ocrad, and more people
+have built hundreds of bots and libraries that use them in interesting ways. A trivial example is Meme Reading
+bots on Reddit. Extracting text from images on sites like Tumblr or Pinterest that have overlay text commonly
+also can be used in order to further add natural language analysis data into models to predict it.
+
+Its also just hella fun. I mean, who would have thought we could do this? Maybe if you go really hard in the paint
+you can build your own program to get all your accounting paperwork scanned in as editable docs. 
+
+So lets go.
+
 ## Beginning steps
+
+There are two potential options for building this in the simplest scale. We will go through building the Flask
+layer here as a simple means to have an API resource we can hit from a frontend framework in order to make
+and application based around this.
+
+We also will provide a tagged commit that will utilize the serverside to generate the HTML needed for the frontend
+to take in an `image_url` and output its text as interpreted per our OCR engine. This tutorial will not go into the 
+detail of generating the UI pieces, but the code is provided, and quite simple.
 
 First, we have to install some dependencies. As always, configuring your environment is 90% of the fun.
 
@@ -136,7 +155,6 @@ import pytesseract
 import requests
 from PIL import Image
 from PIL import ImageFilter
-from nltk.corpus import words
 from StringIO import StringIO
 
 _ALL_WORDS = words.words() # we'll use it later don't worry
@@ -156,23 +174,6 @@ Wonderful!
 
 So, our main method is `process_image()`, where we sharpen the image to crisp up the text.
 
-Sweet! A working module to toy with. However, we have some maintenance to do in order to get this code to run. If one desires to do any sort of real processing, they best be using quite a bit of [NLTK](http://www.nltk.org/), so we will need to install all corpora.
-
-### Configuring NLTK
-
-> **NOTE** if you would rather not do any analysis of text on the images, you can skip this. But I mean, who doesn't process their strings yo? Let's just do it and not be lazy, boring developers. 
-
-Since the NLTK is in our env (installed via pip), let's run `python` to fire up a shell:
-
-```sh
-$ import nltk
-$ nltk.download()
-$ d
-$ all-corpora
-```
-
-Grab a beer. This will take a minute. Quit and exit the shell once done. Now, we have everything we need to run some basic OCR.
-
 ## Optional: Building a CLI tool for your new OCR Engine
 
 Making a CLI is a great proof of concept, and a fun breather after doing so much configuration. So lets take a stab at making one. Create a new file within "flask_server" called *cli.py* and then add the following code:
@@ -182,7 +183,6 @@ import sys
 import requests
 import pytesseract
 from PIL import Image
-from nltk.corpus import words
 from StringIO import StringIO
 
 
@@ -268,11 +268,6 @@ $ curl -X POST http://localhost:5000/ocr -d 'https://s-media-cache-ec0.pinimg.co
   "output": "Stfawfbeffy Lemon\nHerbal Tea\nSlushie"
 }
 ```
-
-### Optimize text with NLTK?
-
-## Conclusion and next steps
-
-This is a WIP and I plan on maintaining and adding to it. Each piece will add more to the main tutorial. Hope you enjoyed. Please fork or star if you want to see/do/use. Grab the final code [here](https://github.com/mjhea0/ocr_tutorial/releases/tag/v1) from the [repository](https://github.com/mjhea0/ocr_tutorial). Cheers!
-
 :)
+
+Happy hacking.

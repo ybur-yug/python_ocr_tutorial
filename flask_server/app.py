@@ -5,24 +5,21 @@ from flask import Flask, request, jsonify
 
 from ocr import process_image
 
-
 app = Flask(__name__)
-
-
-@app.route('/ocr', methods=["POST"])
+_VERSION = 1
+@app.route('/v{}/ocr'.format(version), methods=["POST"])
 def ocr():
     try:
-        url = request.form.keys()[0]
+        url = request.form['image_url']
         output = process_image(url)
         return jsonify({"output": output})
-    except:
-        return jsonify({"error": "Did you send the proper url?"})
+    except KeyError:
+        return jsonify({"error": "Did you mean to send data formatted: '{"image_url": "some_url"}'")
 
 
 @app.errorhandler(500)
 def internal_error(error):
-    print str(error)
-
+    print str(error) # ghetto logging
 
 @app.errorhandler(404)
 def not_found_error(error):
