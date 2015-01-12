@@ -153,9 +153,6 @@ from PIL import Image
 from PIL import ImageFilter
 from StringIO import StringIO
 
-_ALL_WORDS = words.words() # we'll use it later don't worry
-
-
 def process_image(url):
     image = _get_image(url)
     image.filter(ImageFilter.SHARPEN)
@@ -180,10 +177,6 @@ import requests
 import pytesseract
 from PIL import Image
 from StringIO import StringIO
-
-
-_ALL_WORDS = words.words()  # we use this later
-
 
 def get_image(url):
     return Image.open(StringIO(requests.get(url).content))
