@@ -4,6 +4,10 @@ from PIL import Image
 from PIL import ImageFilter
 from StringIO import StringIO
 
+
+_ALL_WORDS = words.words()  # we'll use this later
+
+
 def process_image(url):
     image = _get_image(url)
     image.filter(ImageFilter.SHARPEN)

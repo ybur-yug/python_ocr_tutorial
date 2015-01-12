@@ -6,7 +6,8 @@ from flask import Flask, request, jsonify
 from ocr import process_image
 
 app = Flask(__name__)
-_VERSION = 1
+_VERSION = 1  # API version
+
 
 @app.route('/v{}/ocr'.format(_VERSION), methods=["POST"])
 def ocr():
@@ -15,12 +16,15 @@ def ocr():
         output = process_image(url)
         return jsonify({"output": output})
     except KeyError:
-        return jsonify({"error": "Did you mean to send data formatted: {'image_url': 'some_url'}"})
+        return jsonify(
+            {"error": "Did you mean to send: {'image_url': 'some_url'}"}
+        )
 
 
 @app.errorhandler(500)
 def internal_error(error):
-    print str(error) # ghetto logging
+    print str(error)  # ghetto logging
+
 
 @app.errorhandler(404)
 def not_found_error(error):

@@ -5,7 +5,7 @@ from PIL import Image
 from StringIO import StringIO
 
 
-_ALL_WORDS = words.words()  # we use this later
+_ALL_WORDS = words.words()  # we'll use this later
 
 
 def get_image(url):
