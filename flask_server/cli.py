@@ -5,9 +5,6 @@ from PIL import Image
 from StringIO import StringIO
 
 
-_ALL_WORDS = words.words()  # we'll use this later
-
-
 def get_image(url):
     return Image.open(StringIO(requests.get(url).content))
 
