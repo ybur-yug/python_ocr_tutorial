@@ -2,7 +2,6 @@ import sys
 import requests
 import pytesseract
 from PIL import Image
-from nltk.corpus import words
 from StringIO import StringIO
 
 
