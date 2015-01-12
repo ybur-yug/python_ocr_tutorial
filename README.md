@@ -15,11 +15,7 @@ So lets go.
 
 There are two potential options for building this in the simplest scale. We will go through building the Flask
 layer here as a simple means to have an API resource we can hit from a frontend framework in order to make
-and application based around this.
-
-We also will provide a tagged commit that will utilize the serverside to generate the HTML needed for the frontend
-to take in an `image_url` and output its text as interpreted per our OCR engine. This tutorial will not go into the 
-detail of generating the UI pieces, but the code is provided, and quite simple.
+and application based around this. The other is to generate the HTML serverside. We will take the former approach.
 
 First, we have to install some dependencies. As always, configuring your environment is 90% of the fun.
 
