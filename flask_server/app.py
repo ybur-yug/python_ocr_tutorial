@@ -7,14 +7,15 @@ from ocr import process_image
 
 app = Flask(__name__)
 _VERSION = 1
-@app.route('/v{}/ocr'.format(version), methods=["POST"])
+
+@app.route('/v{}/ocr'.format(_VERSION), methods=["POST"])
 def ocr():
     try:
         url = request.form['image_url']
         output = process_image(url)
         return jsonify({"output": output})
     except KeyError:
-        return jsonify({"error": "Did you mean to send data formatted: '{"image_url": "some_url"}'")
+        return jsonify({"error": "Did you mean to send data formatted: {'image_url': 'some_url'}"})
 
 
 @app.errorhandler(500)
