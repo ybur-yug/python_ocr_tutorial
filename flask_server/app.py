@@ -1,7 +1,7 @@
 import os
 import logging
 from logging import Formatter, FileHandler
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 from ocr import process_image
 
@@ -11,7 +11,7 @@ _VERSION = 1  # API version
 
 @app.route('/')
 def main():
-    return "test"
+    return render_template('index.html')
 
 
 @app.route('/v{}/ocr'.format(_VERSION), methods=["POST"])
