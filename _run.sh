@@ -20,7 +20,7 @@ sudo apt-get build-dep -y python-imaging --fix-missing
 sudo apt-get install -y imagemagick
 
 
-# Building Leptonica
+# Build Leptonica
 wget http://www.leptonica.org/source/leptonica-1.70.tar.gz
 tar -zxvf leptonica-1.70.tar.gz
 cd leptonica-1.70/
@@ -31,7 +31,7 @@ sudo make install
 sudo ldconfig
 
 
-# Building Tesseract
+# Build Tesseract
 cd ..
 wget https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.02.tar.gz
 tar -zxvf tesseract-ocr-3.02.02.tar.gz

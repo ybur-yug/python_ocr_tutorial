@@ -9,10 +9,15 @@ app = Flask(__name__)
 _VERSION = 1  # API version
 
 
+@app.route('/')
+def main():
+    return "tesr"
+
+
 @app.route('/v{}/ocr'.format(_VERSION), methods=["POST"])
 def ocr():
     try:
-        url = request.form['image_url']
+        url = request.json['image_url']
         output = process_image(url)
         return jsonify({"output": output})
     except KeyError:
