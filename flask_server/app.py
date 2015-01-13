@@ -20,7 +20,7 @@ def ocr():
         url = request.json['image_url']
         output = process_image(url)
         return jsonify({"output": output})
-    except KeyError:
+    except:
         return jsonify(
             {"error": "Did you mean to send: {'image_url': 'some_url'}"}
         )
