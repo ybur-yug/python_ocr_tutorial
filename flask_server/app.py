@@ -11,7 +11,7 @@ _VERSION = 1  # API version
 
 @app.route('/')
 def main():
-    return "tesr"
+    return "test"
 
 
 @app.route('/v{}/ocr'.format(_VERSION), methods=["POST"])
