@@ -1,6 +1,6 @@
 # Docker OSX Install
 
-How to build the container and run the image...
+Build the container and run the image...
 
 ```sh
 $ boot2docker init
